@@ -13,9 +13,11 @@ def compress_image(image_path, output_path, target_size_kb):
 
 
 def process_folder(folder_path, target_size_kb=300):
-    for root, dirs, files in os.walk(folder_path):
+    if folder_path == '':
+        folder_path = os.getcwd()
+    for root, _, files in os.walk(folder_path):
         for filename in files:
-            if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
+            if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.heif')):
                 image_path = os.path.join(root, filename)
                 output_path = os.path.join(root, filename)
 
@@ -25,5 +27,5 @@ def process_folder(folder_path, target_size_kb=300):
 
 
 if __name__ == "__main__":
-    directory_to_process = input("Введите путь к папке для обработки: ")
+    directory_to_process = input("Введите название папки или нажмите Enter чтобы продолжить: ")
     process_folder(directory_to_process)
